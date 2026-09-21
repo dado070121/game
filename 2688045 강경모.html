@@ -21,7 +21,7 @@ canvas{
 <h1>공 잡기 게임</h1>
 
 <p>
-점수 : <span id="score">0</span> | 남은 시간 : <span id="time">30</span>초 | 속도 : <span id="speed">1</span> 단계 | 증가폭 : <span id="ball.dx">3</span>
+점수 : <span id="score">0</span> | 남은 시간 : <span id="time">30</span>초 | 속도 : <span id="speed">1</span> 단계 | 속도값 : <span id="ball.dx">3</span> , <span id="ball.dy">2</span>
 </p>
 <button onclick="startGame()">게임 시작</button><br>
 
@@ -43,6 +43,7 @@ canvas{
     const timeText = document.getElementById("time");
 
     const ballDxText = document.getElementById("ball.dx");
+    const ballDyText = document.getElementById("ball.dy");
 
     let timeLeft = 30;
     let gameRunning = false;
@@ -64,6 +65,7 @@ canvas{
         ball.dy = 2;
 
         ballDxText.textContent = ball.dx;
+        ballDyText.textContent = ball.dy;
 
         gameRunning = true;
 
@@ -175,6 +177,7 @@ canvas{
             }
 
             ballDxText.textContent = Math.abs(ball.dx);
+            ballDyText.textContent = Math.abs(ball.dy);
 
             moveBallRandom();
         }
