@@ -21,7 +21,7 @@ canvas{
 <h1>공 잡기 게임</h1>
 
 <p>
-점수 : <span id="score">0</span> | 남은 시간 : <span id="time">30</span>초 | 속도 : <span id="speed">1</span> 단계
+점수 : <span id="score">0</span> | 남은 시간 : <span id="time">30</span>초 | 속도 : <span id="speed">1</span> 단계 | 증가폭 : <span id="ball.dx">3</span>
 </p>
 <button onclick="startGame()">게임 시작</button><br>
 
@@ -42,6 +42,8 @@ canvas{
 
     const timeText = document.getElementById("time");
 
+    const ballDxText = document.getElementById("ball.dx");
+
     let timeLeft = 30;
     let gameRunning = false;
     let timerId;
@@ -60,6 +62,8 @@ canvas{
         ball.y = 200;
         ball.dx = 3;
         ball.dy = 2;
+
+        ballDxText.textContent = ball.dx;
 
         gameRunning = true;
 
@@ -142,19 +146,35 @@ canvas{
             if (gameRunning) {speedLevel++;}
             speedText.textContent = speedLevel;
 
-            if (ball.dx > 0){
-                ball.dx += 0.5;
-            } 
-            else {
-                ball.dx -= 0.5;
+            if (ball.dx > 0) {
+                if (score % 5 === 0) {
+                    ball.dx += 1;
+                } else {
+                    ball.dx += 0.5;
+                }
+            } else {
+                if (score % 5 === 0) {
+                    ball.dx -= 1;
+                } else {
+                    ball.dx -= 0.5;
+                }
             }
 
-            if (ball.dy > 0){
-                ball.dy += 0.5;
+            if (ball.dy > 0) {
+                if (score % 5 === 0) {
+                    ball.dy += 1;
+                } else {
+                    ball.dy += 0.5;
+                }
+            } else {
+                if (score % 5 === 0) {
+                    ball.dy -= 1;
+                } else {
+                    ball.dy -= 0.5;
+                }
             }
-            else {
-                ball.dy -= 0.5;
-            }
+
+            ballDxText.textContent = Math.abs(ball.dx);
 
             moveBallRandom();
         }
